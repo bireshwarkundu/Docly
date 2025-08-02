@@ -57,6 +57,17 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // EmergenSync brand colors
+        'emergensync': {
+          blue: '#0052CC',
+          red: '#DC2625',
+          gray: '#666666',
+          lightgray: '#E2E8F0',
+          bg: '#F9FAFB',
+          'map-bg': '#E8F4FD',
+          'click-bg': '#F8FAFC',
+          dark: '#1A1A1A'
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
