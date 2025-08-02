@@ -55,7 +55,10 @@ export default function Index() {
       case "contactNumber":
         if (!value.trim()) {
           newErrors.contactNumber = "Contact number is required";
-        } else if (!/^\+91\s\d{5}-\d{5}$/.test(value) && !/^\d{10}$/.test(value.replace(/\D/g, ""))) {
+        } else if (
+          !/^\+91\s\d{5}-\d{5}$/.test(value) &&
+          !/^\d{10}$/.test(value.replace(/\D/g, ""))
+        ) {
           newErrors.contactNumber = "Please enter a valid contact number";
         } else {
           delete newErrors.contactNumber;
@@ -97,17 +100,19 @@ export default function Index() {
   };
 
   const handleInputChange = (fieldName: keyof FormData, value: string) => {
-    setFormData(prev => ({ ...prev, [fieldName]: value }));
+    setFormData((prev) => ({ ...prev, [fieldName]: value }));
   };
 
   const handleNext = () => {
     // Validate all fields
-    Object.keys(formData).forEach(key => {
+    Object.keys(formData).forEach((key) => {
       validateField(key as keyof FormData, formData[key as keyof FormData]);
     });
 
-    const hasErrors = Object.values(errors).some(error => error);
-    const hasEmptyFields = Object.values(formData).some(value => !value.trim());
+    const hasErrors = Object.values(errors).some((error) => error);
+    const hasEmptyFields = Object.values(formData).some(
+      (value) => !value.trim(),
+    );
 
     if (!hasErrors && !hasEmptyFields) {
       // Proceed to next step
@@ -117,7 +122,7 @@ export default function Index() {
 
   const districts = [
     "Kolkata",
-    "Howrah", 
+    "Howrah",
     "North 24 Parganas",
     "South 24 Parganas",
     "Hooghly",
@@ -133,7 +138,7 @@ export default function Index() {
     "Cooch Behar",
     "Malda",
     "South Dinajpur",
-    "North Dinajpur"
+    "North Dinajpur",
   ];
 
   return (
@@ -143,8 +148,20 @@ export default function Index() {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
-                <svg width="32" height="32" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M26.2922 28.5771V7.24382C26.2922 6.53657 26.0112 5.85829 25.5111 5.3582C25.011 4.8581 24.3327 4.57715 23.6255 4.57715H10.2922C9.58491 4.57715 8.90663 4.8581 8.40653 5.3582C7.90643 5.85829 7.62548 6.53657 7.62548 7.24382V28.5771M26.2922 28.5771H28.9588M26.2922 28.5771H19.6255M7.62548 28.5771H4.95882M7.62548 28.5771H14.2922M19.6255 28.5771V21.9105C19.6255 21.5569 19.485 21.2177 19.235 20.9677C18.9849 20.7176 18.6458 20.5771 18.2922 20.5771H15.6255C15.2719 20.5771 14.9327 20.7176 14.6827 20.9677C14.4326 21.2177 14.2922 21.5569 14.2922 21.9105V28.5771M19.6255 28.5771H14.2922M12.9588 9.91048H14.2922M12.9588 15.2438H14.2922M19.6255 9.91048H20.9588M19.6255 15.2438H20.9588" stroke="#0052CC" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 33 33"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M26.2922 28.5771V7.24382C26.2922 6.53657 26.0112 5.85829 25.5111 5.3582C25.011 4.8581 24.3327 4.57715 23.6255 4.57715H10.2922C9.58491 4.57715 8.90663 4.8581 8.40653 5.3582C7.90643 5.85829 7.62548 6.53657 7.62548 7.24382V28.5771M26.2922 28.5771H28.9588M26.2922 28.5771H19.6255M7.62548 28.5771H4.95882M7.62548 28.5771H14.2922M19.6255 28.5771V21.9105C19.6255 21.5569 19.485 21.2177 19.235 20.9677C18.9849 20.7176 18.6458 20.5771 18.2922 20.5771H15.6255C15.2719 20.5771 14.9327 20.7176 14.6827 20.9677C14.4326 21.2177 14.2922 21.5569 14.2922 21.9105V28.5771M19.6255 28.5771H14.2922M12.9588 9.91048H14.2922M12.9588 15.2438H14.2922M19.6255 9.91048H20.9588M19.6255 15.2438H20.9588"
+                    stroke="#0052CC"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
                 <div>
                   <h1 className="text-2xl font-bold text-emergensync-dark leading-9">
@@ -181,7 +198,9 @@ export default function Index() {
                   type="text"
                   placeholder="Enter police station name"
                   value={formData.stationName}
-                  onChange={(e) => handleInputChange("stationName", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("stationName", e.target.value)
+                  }
                   onBlur={(e) => validateField("stationName", e.target.value)}
                   className="w-full h-12 px-4 border border-emergensync-lightgray rounded-lg text-base text-emergensync-dark bg-white focus:outline-none focus:ring-2 focus:ring-emergensync-blue focus:border-transparent"
                 />
@@ -201,7 +220,9 @@ export default function Index() {
                   type="text"
                   placeholder="Enter officer-in-charge full name"
                   value={formData.officerName}
-                  onChange={(e) => handleInputChange("officerName", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("officerName", e.target.value)
+                  }
                   onBlur={(e) => validateField("officerName", e.target.value)}
                   className="w-full h-12 px-4 border border-emergensync-lightgray rounded-lg text-base text-emergensync-dark bg-white focus:outline-none focus:ring-2 focus:ring-emergensync-blue focus:border-transparent"
                 />
@@ -223,7 +244,9 @@ export default function Index() {
                   type="tel"
                   placeholder="+91 98765-43210"
                   value={formData.contactNumber}
-                  onChange={(e) => handleInputChange("contactNumber", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("contactNumber", e.target.value)
+                  }
                   onBlur={(e) => validateField("contactNumber", e.target.value)}
                   className="w-full h-12 px-4 border border-emergensync-lightgray rounded-lg text-base text-emergensync-dark bg-white focus:outline-none focus:ring-2 focus:ring-emergensync-blue focus:border-transparent"
                 />
@@ -303,7 +326,9 @@ export default function Index() {
                 </label>
                 <select
                   value={formData.district}
-                  onChange={(e) => handleInputChange("district", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("district", e.target.value)
+                  }
                   onBlur={(e) => validateField("district", e.target.value)}
                   className="w-full h-12 px-4 border border-emergensync-lightgray rounded-lg text-base text-emergensync-dark bg-white focus:outline-none focus:ring-2 focus:ring-emergensync-blue focus:border-transparent"
                 >
